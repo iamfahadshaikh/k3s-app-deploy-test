@@ -1,0 +1,51 @@
+version: "3.9"
+services:
+  frontend:
+    build:
+      context: ./frontend  # Build from frontend directory
+    ports:
+      - "80:80"  # Expose port 80 for frontend
+    networks:
+      - app-network
+
+  backend:
+    build:
+      context: ./backend  # Build from backend directory
+    ports:
+      - "3000:3000"  # Expose port 3000 for backend
+    networks:
+      - app-network
+    depends_on:
+      - mysql
+      - redis
+
+  mysql:
+    image: mysql:latest  # Pull latest MySQL image
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: mydb
+    volumes:
+      - mysql-data:/var/lib/mysql  # Persistent storage for MySQL
+    ports:
+      - "3306:3306"  # Expose port 3306 for MySQL
+    networks:
+      - app-network
+
+  redis:
+    image: redis:latest  # Pull latest Redis image
+    volumes:
+      - redis-data:/data  # Persistent storage for Redis
+    ports:
+      - "6379:6379"  # Expose port 6379 for Redis
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge  # Use bridge network driver for communication between containers
+
+volumes:
+  mysql-data:
+    driver: local  # Persist MySQL data locally
+  redis-data:
+    driver: local  # Persist Redis data locally
