@@ -1,0 +1,52 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.log
+*.sqlite3
+
+# Virtual environments
+.env
+.venv/
+env/
+venv/
+
+# Docker
+*.tar
+*.pid
+*.sock
+docker-compose.override.yml
+dockerfiles/**/__pycache__/
+dockerfiles/**/requirements.txt.lock
+
+# Kubernetes / K3s
+*.yaml~
+*.yml~
+*.bak
+*.tmp
+.kube/
+.k3s/
+
+# IDE / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Logs and temp
+logs/
+tmp/
+*.log
+
+# Node (frontend)
+node_modules/
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+dist/
+build/
+
+# Misc
+*.swp
+*.swo
